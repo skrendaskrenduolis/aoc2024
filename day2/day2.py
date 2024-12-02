@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def safety_check(input_list: list) -> bool:
-    diff_array = np.diff(np.fromiter(map(int, input_list), dtype=int))
+def safety_check(input_list) -> bool:
+    diff_array = np.diff(input_list)
 
     if (np.all(diff_array < 0) and not np.any((diff_array < -3) | (diff_array > -1))) or \
           (np.all(diff_array > 0) and not np.any((diff_array < 1) | (diff_array > 3))):
@@ -16,8 +16,8 @@ with open("day2_input", "r") as infile:
     dampened_report_counter = 0
     safe_report_counter = 0
     for line in infile:
-        line_list = line.split()
-
+        line_list = np.fromstring(line, dtype=int, sep="    ")
+        
         # part 1        
         safe_report = safety_check(line_list)
         if safe_report:
@@ -26,7 +26,7 @@ with open("day2_input", "r") as infile:
         
         # part 2
         for i in range(0, len(line_list)):
-            check_correctness = safety_check(line_list[:i] + line_list[i+1:])
+            check_correctness = safety_check(np.concatenate([line_list[:i], line_list[i+1:]]))
             if check_correctness:
                 dampened_report_counter += 1
                 break
