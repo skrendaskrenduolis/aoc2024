@@ -31,20 +31,3 @@ with open("day1_input", "r") as infile:
     
     print(sum(number_dict.values()))
 
-
-
-def create_custom_hashmap(array_a, array_b):
-    # Count occurrences in array A and B
-    count_a = Counter(array_a)
-    count_b = Counter(array_b)
-    
-    # Create the result hashmap
-    result = {}
-    for key in count_a:
-        result[key] = count_a[key] * count_b.get(key, 0) * key
-        
-    return result
-
-hashmap = create_custom_hashmap(left_location_list, right_location_list)
-print(len(left_location_list))
-print(sum(hashmap.values()))
