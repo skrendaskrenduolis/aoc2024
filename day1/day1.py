@@ -1,5 +1,3 @@
-from collections import Counter
-
 # Part 1
 with open("day1_input", "r") as infile:
     left_location_list = []
@@ -30,4 +28,3 @@ with open("day1_input", "r") as infile:
             number_dict[number] = m*number*n
     
     print(sum(number_dict.values()))
-
