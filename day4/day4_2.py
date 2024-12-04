@@ -18,3 +18,4 @@ with open("day4_input", "r") as infile:
         if (v_diag == "SAM" or v_diag == "MAS") and (v_antidiag == "SAM" or v_antidiag == "MAS"):
             x_shapes += 1
     print(x_shapes)
+    
