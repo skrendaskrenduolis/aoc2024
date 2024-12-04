@@ -24,12 +24,12 @@ with open("day4_input", "r") as infile:
     diagonal_count = 0
     anti_diagonal_count = 0
     for i in range(-matrix_x_limit+1, matrix_x_limit):
-        joined_row = "".join(xmas_matrix.diagonal(i).tolist()[0])
-        joined_column = "".join(np.fliplr(xmas_matrix).diagonal(i).tolist()[0])
-        if len(joined_row) >= 4:
-            diagonal_count += len(re.findall(r"(?=(XMAS|SAMX))", joined_row))
-        if len(joined_row) >= 4:
-            anti_diagonal_count += len(re.findall(r"(?=(XMAS|SAMX))", joined_column))
+        joined_diagonal = "".join(xmas_matrix.diagonal(i).tolist()[0])
+        joined_anti_diagonal = "".join(np.fliplr(xmas_matrix).diagonal(i).tolist()[0])
+        if len(joined_diagonal) >= 4:
+            diagonal_count += len(re.findall(r"(?=(XMAS|SAMX))", joined_diagonal))
+        if len(joined_anti_diagonal) >= 4:
+            anti_diagonal_count += len(re.findall(r"(?=(XMAS|SAMX))", joined_anti_diagonal))
         
     print(horizontal_count + vertical_count + diagonal_count + anti_diagonal_count)    
     
