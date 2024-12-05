@@ -10,7 +10,6 @@ def check_correctess(x):
         below_set = set(x[i+1:])
         
         if above_set.issubset(above_below_dict[x[i]]["above"]) and below_set.issubset(above_below_dict[x[i]]["below"]):
-            # print(above_set, line_list[i], below_set)
             correct_update_verify.append(True)
             continue
         correct_update_verify.append(False)
@@ -27,7 +26,6 @@ def recurse_func(error_list):
             error_list[i], error_list[i+1] = error_list[i+1], error_list[i]
     check = check_correctess(error_list)
     if all(check):
-        print(error_list)
         return error_list
     recurse_func(error_list)
 
