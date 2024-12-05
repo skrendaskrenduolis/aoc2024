@@ -8,12 +8,11 @@ def check_correctess(x):
     for i in range(len(x)):
         above_set = set(x[:i])
         below_set = set(x[i+1:])
-        
         if above_set.issubset(above_below_dict[x[i]]["above"]) and below_set.issubset(above_below_dict[x[i]]["below"]):
             correct_update_verify.append(True)
             continue
         correct_update_verify.append(False)
-    return correct_update_verify
+    return all(correct_update_verify)
 
 
 def recurse_func(error_list):
@@ -24,8 +23,7 @@ def recurse_func(error_list):
     for i in range(0, len(error_list)-1):
         if error_list[i+1] in above_below_dict[error_list[i]]["above"]:
             error_list[i], error_list[i+1] = error_list[i+1], error_list[i]
-    check = check_correctess(error_list)
-    if all(check):
+    if check_correctess(error_list):
         return error_list
     recurse_func(error_list)
 
@@ -41,7 +39,6 @@ with open("day5_input", "r") as infile:
             parsing_pages = False
             continue
         
-
         line_list = list(map(int, re.split(r'\||,', line.strip())))
 
         # build the dict showing what numbers are allowed above and what are allowed below
@@ -56,8 +53,7 @@ with open("day5_input", "r") as infile:
 
         # part 1
         # check if numbers ordered correctly, if yes then add middle value to sum
-        correct_update_verify = check_correctess(line_list)
-        if all(correct_update_verify):
+        if check_correctess(line_list):
             middle_index = len(line_list) // 2
             middle_number_sum += line_list[middle_index]
             continue
